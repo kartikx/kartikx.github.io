@@ -17,6 +17,36 @@ makeRows(gridRows, gridCols);
 let gridCells = document.querySelectorAll('.grid-cell');
 initializeStartEnd();
 
+
+let animationTime = 2;
+// Events
+runButton.addEventListener('click', runAlgorithm);
+clearButton.addEventListener('click', resetGrid);
+addWallButton.addEventListener('click', () => {addWallPressed = true; console.log(addWallPressed)});
+
+// Functions
+
+function toggleButtons() {
+    runButton.disabled = !runButton.disabled;
+    clearButton.disabled = !clearButton.disabled;
+    clearButton.classList.toggle('btn-disabled');
+}
+
+function runAlgorithm(e) {
+    e.target.classList.add('btn-is-running');
+    toggleButtons();
+    if (selectBox.value == 'BFS') {
+        bfs(startNode, endNode, animationTime);
+    }
+}
+
+function resetGrid() {
+    gridMap.innerHTML = "";
+    makeRows(gridRows, gridCols);
+    gridCells = document.querySelectorAll('.grid-cell');
+    initializeStartEnd();
+}
+
 function onMouseDown(cell) {
     if (Number(cell.getAttribute('cell-value')) == startNode)
         startNodePressed = true;
