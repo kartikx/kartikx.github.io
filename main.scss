@@ -18,14 +18,8 @@ body {
 .container {
     display: grid;
     grid-template: "options" min-content "grid-map" min-content / min-content;
-    margin-top: 6em;
+    margin-top: 1em;
     padding: 0em 2em;
-}
-
-.settings {
-    grid-area: options;
-    display: flex;
-    justify-content: space-around;
 }
 
 .grid-map {
@@ -153,8 +147,6 @@ body {
     padding: 2em 1em ;
     background-color: whitesmoke;
     font-family: 'Montserrat', sans-serif;
-
-    border-bottom: 1px solid black;
 
     span {
         display: inline;
