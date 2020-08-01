@@ -15,17 +15,8 @@ body {
   display: grid;
   grid-template: "options" -webkit-min-content "grid-map" -webkit-min-content / -webkit-min-content;
   grid-template: "options" min-content "grid-map" min-content / min-content;
-  margin-top: 6em;
+  margin-top: 1em;
   padding: 0em 2em;
-}
-
-.settings {
-  grid-area: options;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
 }
 
 .grid-map {
@@ -166,7 +157,6 @@ body {
   padding: 2em 1em;
   background-color: whitesmoke;
   font-family: 'Montserrat', sans-serif;
-  border-bottom: 1px solid black;
 }
 
 .button-bar span {
