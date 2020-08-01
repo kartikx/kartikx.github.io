@@ -38,15 +38,29 @@ function setSpeed() {
 }
 
 function toggleButtons() {
-    runButton.disabled = !runButton.disabled;    
+    // runButton.disabled = !runButton.disabled;
     clearButton.disabled = !clearButton.disabled;
     clearButton.classList.toggle('btn-disabled');
 }
 
 function runAlgorithm(e) {
+
+    // Implies Algorithm is Running
+    if (!runCompleted && runStarted) {
+        execute = false;
+        toggleButtons();
+        e.target.classList.remove('btn-is-running');
+        e.target.innerText = 'Run Algorithm!';
+        runCompleted = true;
+        return;
+    }
+
     e.target.classList.add('btn-is-running');
+    e.target.innerText = 'Cancel';
     toggleButtons();
     runCompleted = false;
+    runStarted = true;
+    execute = true;
     if (selectBox.value == 'Dijkstra') {
         bfs(startNode, endNode, animationTime);
     }
@@ -58,6 +72,7 @@ function resetGrid() {
     gridCells = document.querySelectorAll('.grid-cell');
     initializeStartEnd();
     runCompleted = false;
+    runStarted = false;
 }
 
 function onMouseDown(cell) {
@@ -71,7 +86,9 @@ function onMouseDown(cell) {
         addWall = true;
     }
 }
-
+/**
+ * If runCompleted is true, then pressing the button should restart it right?
+ */
 function onMouseHover(cell){
     let cellV = Number(cell.getAttribute('cell-value'));
 
@@ -82,7 +99,7 @@ function onMouseHover(cell){
         startNode = cellV;
         cell.classList.add('grid-cell-start');
 
-        if (runCompleted) {
+        if (runStarted && runCompleted) {
             bfs(startNode, endNode, 0);
         }
     }
@@ -94,7 +111,7 @@ function onMouseHover(cell){
         }
         endNode = cellV;
         cell.classList.add('grid-cell-end');
-        if (runCompleted) {
+        if (runStarted && runCompleted) {
             bfs(startNode, endNode, 0);
         }
     }
@@ -203,7 +220,7 @@ async function bfs(startNode, endNode, animationTime) {
     queue.push(startNode);
     visited[startNode] = true;
 
-    while (queue.length > 0) {
+    while (queue.length > 0 && execute) {
         let currNode = queue.shift();
         if (currNode != startNode && currNode != endNode)
             markVisited(currNode);
