@@ -72,6 +72,23 @@ function markToVisit(val) {
 }
 
 
+function getVisited(){
+    visited = [];
+    pred = []
+    for (let c = 0; c < gridRows*gridCols ; c++)
+    {
+        if (!gridCells[c].classList.contains('grid-cell-wall'))
+        {
+            visited[c] = false;
+            pred[c] = -1;
+        }
+        else {
+            visited[c] = true;
+            pred[c] = -1;
+        }
+    }
+    return [visited, pred];
+}
 
 async function bfs(startNode, endNode, animationTime) {
     const step = [-gridCols, gridCols, -1, 1];
