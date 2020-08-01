@@ -108,3 +108,20 @@ async function bfs(startNode, endNode, animationTime) {
         }
     }
 }
+
+function markPath(val){
+    gridCells[val].classList.add('grid-cell-path');
+}
+
+async function printPath(endNode, pred, animationTime)
+{
+    endNode = pred[endNode];
+    while(endNode != -1 && pred[endNode] != -1)
+    {
+        markPath(endNode);
+        endNode = pred[endNode];
+        await sleep(animationTime);
+    }
+
+    runComplete();
+}
