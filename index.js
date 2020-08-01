@@ -45,3 +45,29 @@ function initializeStartEnd(){
     gridCells[endNode].classList.add('grid-cell-end');
 
 }
+
+// TODO Read the article.
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function isValid(x, y) {
+    if (x < 0 || y < 0 || x >=gridRows || y>=gridCols)
+        return false;
+    
+    return true;
+}
+
+
+function markVisited(val) {
+    let cl = gridCells[val].classList;
+    cl.add('grid-cell-visited');
+    if (cl.contains('grid-cell-tovisit')){
+        cl.remove('grid-cell-tovisit');
+    }
+}
+
+function markToVisit(val) {
+    gridCells[val].classList.add('grid-cell-tovisit');
+}
+
