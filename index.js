@@ -17,6 +17,50 @@ makeRows(gridRows, gridCols);
 let gridCells = document.querySelectorAll('.grid-cell');
 initializeStartEnd();
 
+function onMouseDown(cell) {
+    if (Number(cell.getAttribute('cell-value')) == startNode)
+        startNodePressed = true;
+    else if (Number(cell.getAttribute('cell-value')) == endNode)
+        endNodePressed = true;
+    else if (addWallPressed)
+    {
+        cell.classList.add('grid-cell-wall');
+        addWall = true;
+
+    }
+}
+
+function onMouseHover(cell){
+    let cellV = Number(cell.getAttribute('cell-value'));
+
+    if (startNodePressed) {
+        if (startNode != -1) {
+            gridCells[startNode].classList.remove('grid-cell-start');
+        }
+        startNode = cellV;
+        cell.classList.add('grid-cell-start');  
+    }
+
+    else if (endNodePressed) {
+        if (endNode != -1) {
+            gridCells[endNode].classList.remove('grid-cell-end');
+        }
+        endNode = cellV;
+        cell.classList.add('grid-cell-end');
+    }
+
+    else if (addWall) {
+        console.log(`Add to ${cell.getAttribute('cell-value')}`);
+        cell.classList.add('grid-cell-wall');  
+    }
+}
+
+function onMouseUp(cell){
+    startNodePressed = false;
+    endNodePressed = false;
+    addWall = false;
+}
+
 function makeRows(rows, cols) {
     gridMap.style.setProperty('--grid-rows', rows);
     gridMap.style.setProperty('--grid-cols', cols);
