@@ -115,15 +115,27 @@ body {
     // background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
 
+.grid-cell-found {
+    background-color: aquamarine;
 }
 
 .grid-cell-visited {
     background-color: #4EA8DE;
+    // transition: background-color 150ms ease-in-out;
+    
+    // @if ($found) {
+        // animation-name: visitedAnimation;
+        // animation-duration: 1600ms;
+    // }
 }
 
 .grid-cell-tovisit {
     background-color: #64DFDF;
+    animation-name: toVisitAnimation;
+    // animation-duration: $speed;
+    animation-duration: 20;
 }
 
 .grid-cell-path {
