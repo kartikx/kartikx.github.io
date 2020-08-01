@@ -2,7 +2,7 @@ const gridMap = document.querySelector('.grid-map');
 const selectBox = document.querySelector('.algorithms-drop-down');
 const runButton = document.querySelector('.btn-run');
 const clearButton = document.querySelector('.btn-clear');
-const addWallButton = document.querySelector('.add-wall');
+const addWallButton = document.querySelector('.wall');
 
 let startNode, endNode;
 
@@ -10,6 +10,8 @@ let startNodePressed = false;
 let endNodePressed = false;
 let addWallPressed = false;
 let addWall = false;
+
+let runCompleted = false;
 
 const gridRows = 16;
 const gridCols = 54;
@@ -22,8 +24,7 @@ let animationTime = 2;
 // Events
 runButton.addEventListener('click', runAlgorithm);
 clearButton.addEventListener('click', resetGrid);
-addWallButton.addEventListener('click', () => {addWallPressed = true; console.log(addWallPressed)});
-
+addWallButton.addEventListener('click', () => {addWallPressed = true;});
 // Functions
 
 function toggleButtons() {
@@ -35,6 +36,7 @@ function toggleButtons() {
 function runAlgorithm(e) {
     e.target.classList.add('btn-is-running');
     toggleButtons();
+    runCompleted = false;
     if (selectBox.value == 'BFS') {
         bfs(startNode, endNode, animationTime);
     }
@@ -45,6 +47,7 @@ function resetGrid() {
     makeRows(gridRows, gridCols);
     gridCells = document.querySelectorAll('.grid-cell');
     initializeStartEnd();
+    runCompleted = false;
 }
 
 function onMouseDown(cell) {
@@ -56,7 +59,6 @@ function onMouseDown(cell) {
     {
         cell.classList.add('grid-cell-wall');
         addWall = true;
-
     }
 }
 
@@ -68,7 +70,11 @@ function onMouseHover(cell){
             gridCells[startNode].classList.remove('grid-cell-start');
         }
         startNode = cellV;
-        cell.classList.add('grid-cell-start');  
+        cell.classList.add('grid-cell-start');
+
+        if (runCompleted) {
+            bfs(startNode, endNode, 0);
+        }
     }
 
     else if (endNodePressed) {
@@ -77,10 +83,12 @@ function onMouseHover(cell){
         }
         endNode = cellV;
         cell.classList.add('grid-cell-end');
+        if (runCompleted) {
+            bfs(startNode, endNode, 0);
+        }
     }
 
     else if (addWall) {
-        console.log(`Add to ${cell.getAttribute('cell-value')}`);
         cell.classList.add('grid-cell-wall');  
     }
 }
@@ -97,6 +105,7 @@ function makeRows(rows, cols) {
     for (let c=0; c<rows*cols; c++){
         let cell = document.createElement("div");
         cell.setAttribute('cell-value', c);
+        cell.setAttribute('draggable', 'false');
         gridMap.appendChild(cell).className = "grid-cell";
         cell.addEventListener('mousedown', () => {
             onMouseDown(cell);
@@ -112,12 +121,10 @@ function makeRows(rows, cols) {
 
 function initializeStartEnd(){
     startNode = gridCols*(gridRows/2 - 1) + Math.floor(gridCols/4);
-    // startNode = gridCols * (Math.floor((2*gridRows + 1)/4));
     endNode = gridCols*(gridRows/2 - 1) + 3*Math.floor(gridCols/4);
 
     gridCells[startNode].classList.add('grid-cell-start');
     gridCells[endNode].classList.add('grid-cell-end');
-
 }
 
 // TODO Read the article.
@@ -132,7 +139,11 @@ function isValid(x, y) {
     return true;
 }
 
-
+async function testF(){
+    console.log('Going to sleep');
+    await sleep(0);
+    console.log('Woke up');
+}
 function markVisited(val) {
     let cl = gridCells[val].classList;
     cl.add('grid-cell-visited');
@@ -153,6 +164,9 @@ function getVisited(){
     {
         if (!gridCells[c].classList.contains('grid-cell-wall'))
         {
+            gridCells[c].classList.remove('grid-cell-visited');
+            gridCells[c].classList.remove('grid-cell-tovisit');
+            gridCells[c].classList.remove('grid-cell-path');
             visited[c] = false;
             pred[c] = -1;
         }
@@ -194,7 +208,8 @@ async function bfs(startNode, endNode, animationTime) {
                     markToVisit(nextNode);
                 queue.push(nextNode);
                 pred[nextNode] = currNode;
-                await sleep(animationTime);
+                if (animationTime)
+                    await sleep(animationTime);
             }
         }
     }
@@ -211,8 +226,18 @@ async function printPath(endNode, pred, animationTime)
     {
         markPath(endNode);
         endNode = pred[endNode];
-        await sleep(animationTime);
+        if (animationTime)
+            await sleep(animationTime);
     }
 
-    runComplete();
+    runComplete(animationTime);
+}
+
+function runComplete(animationTime) {
+    runCompleted = true;
+    if (animationTime)
+    {
+        runButton.classList.remove('btn-is-running');
+        toggleButtons();
+    }
 }
