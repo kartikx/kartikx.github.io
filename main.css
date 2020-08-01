@@ -1,0 +1,294 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.container {
+  display: -ms-grid;
+  display: grid;
+  grid-template: "options" -webkit-min-content "grid-map" -webkit-min-content / -webkit-min-content;
+  grid-template: "options" min-content "grid-map" min-content / min-content;
+  margin-top: 6em;
+  padding: 0em 2em;
+}
+
+.settings {
+  grid-area: options;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.grid-map {
+  border: 1px solid #56CFE1;
+  grid-area: grid-map;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (1fr)[var];
+      grid-template-rows: repeat(var(--grid-rows), 1fr);
+  -ms-grid-columns: (1fr)[var];
+      grid-template-columns: repeat(var(--grid-cols), 1fr);
+}
+
+.navbar {
+  background-color: #007ea7;
+  padding: 0.5em 0.5em;
+  font-size: 1.4rem;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  display: -ms-grid;
+  display: grid;
+  grid-template: "brand dropdown run clea-r ." / 2fr 3fr 1fr 1fr 1fr;
+  gap: 0 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar .brand {
+  color: white;
+  grid-area: brand;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.navbar button {
+  border: none;
+  padding: 0.5em 0.75em;
+  font-size: 1.2rem;
+  cursor: pointer;
+  -webkit-transition: background-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out;
+  color: white;
+}
+
+.navbar .btn-run {
+  grid-area: run;
+  background-color: lightseagreen;
+}
+
+.navbar .btn-run:hover {
+  background-color: #21aca5;
+}
+
+.navbar .btn-is-running {
+  grid-area: run;
+  background-color: #b61b1b;
+}
+
+.navbar .btn-is-running:hover {
+  background-color: #9c1a1a;
+}
+
+.navbar .btn-clear {
+  grid-area: clea-r;
+  background-color: lightseagreen;
+}
+
+.navbar .btn-clear:hover {
+  background-color: #21aca5;
+}
+
+.navbar .btn-disabled {
+  background-color: #5e6369;
+}
+
+.navbar .btn-disabled:hover {
+  background-color: #4e5358;
+}
+
+.algorithms-drop-down {
+  width: 500px;
+}
+
+.grid-cell {
+  border: 1px solid #56CFE1;
+  padding: 1em;
+  cursor: pointer;
+}
+
+.grid-cell-start {
+  background-color: aquamarine;
+  background-image: url("./rightarrow.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.grid-cell-end {
+  background-image: url("./target2.svg");
+  background-color: lightsalmon;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.grid-cell-visited {
+  background-color: #4EA8DE;
+}
+
+.grid-cell-tovisit {
+  background-color: #64DFDF;
+}
+
+.grid-cell-path {
+  background-color: lightgreen;
+}
+
+.grid-cell-wall {
+  background-image: url("./wall.svg");
+  background-color: lightgrey;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.button-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 2em 1em;
+  background-color: whitesmoke;
+  font-family: 'Montserrat', sans-serif;
+  border-bottom: 1px solid black;
+}
+
+.button-bar span {
+  display: inline;
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: #4EA8DE;
+  padding: 0em 0.5em;
+}
+
+.flex-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.start-node, .end-node, .unvisited-node, .visited-node, .shortest-path-node {
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 2em;
+  width: 2em;
+}
+
+.start-node {
+  background-image: url("./rightarrow.svg");
+  background-color: aquamarine;
+}
+
+.end-node {
+  background-image: url("./target2.svg");
+  background-color: lightsalmon;
+}
+
+.unvisited-node {
+  background-color: white;
+}
+
+.visited-node {
+  background-color: #4EA8DE;
+}
+
+.shortest-path-node {
+  background-color: lightgreen;
+}
+
+.wall {
+  cursor: pointer;
+}
+
+.wall svg {
+  height: 2em;
+  width: 2em;
+}
+
+.wall svg .st0 {
+  fill: white;
+  stroke: #778899;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+}
+
+.wall svg .st1 {
+  fill: none;
+  stroke: #778899;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wall svg .st2 {
+  fill: none;
+  stroke: #778899;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 6,6;
+}
+
+.wall svg .st3 {
+  fill: none;
+  stroke: #778899;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 4,4;
+}
+
+.wall svg .st4 {
+  fill: none;
+  stroke: #778899;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.wall svg .st5 {
+  fill: none;
+  stroke: #778899;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 3.1081,3.1081;
+}
+
+.wall svg .st6 {
+  fill: none;
+  stroke: #778899;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+  stroke-dasharray: 4,3;
+}
+
+.wall svg:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+/*# sourceMappingURL=main.css.map */
