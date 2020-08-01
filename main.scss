@@ -94,3 +94,34 @@ body {
         }
     }
 }
+
+
+.grid-cell {
+    border: 1px solid #56CFE1;
+    padding: 1em;
+    cursor: pointer;
+}
+
+.grid-cell-start {
+    background-color: rgb(207, 77, 37);
+}
+
+.grid-cell-end {
+    background-color: rgb(41, 190, 41);
+}
+
+.grid-cell-visited {
+    background-color: #4EA8DE;
+}
+
+.grid-cell-tovisit {
+    background-color: #64DFDF;
+}
+
+.grid-cell-path {
+    background-color: #6930C3;
+}
+
+.grid-cell-wall {
+    background-color: lightslategray;
+}
