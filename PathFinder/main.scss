@@ -151,7 +151,6 @@ body {
 }
 
 .grid-cell-path {
-    // background-color: #6930C3;
     background-color: lightgreen;
 }
 
@@ -227,9 +226,7 @@ body {
         .st4{fill: none; stroke:#778899;stroke-width:2;stroke-linecap:round;}
         .st5{fill: none; stroke:#778899;stroke-width:2;stroke-linecap:round;stroke-dasharray:3.1081,3.1081;}
         .st6{fill: none; stroke:#778899;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:4,3;}
-        &:hover .st0 {
-            // stroke: #007ea7;
-        }
+
         &:hover {
             transform: scale(1.1);
         }
