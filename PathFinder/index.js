@@ -3,6 +3,7 @@ const selectBox = document.querySelector('.algorithms-drop-down');
 const runButton = document.querySelector('.btn-run');
 const clearButton = document.querySelector('.btn-clear');
 const addWallButton = document.querySelector('.wall');
+let selectSpeed = document.querySelector('.select-speed');
 
 let startNode, endNode;
 
@@ -20,12 +21,21 @@ let gridCells = document.querySelectorAll('.grid-cell');
 initializeStartEnd();
 
 
-let animationTime = 2;
+let animationTime = selectSpeed.value;
+
 // Events
 runButton.addEventListener('click', runAlgorithm);
 clearButton.addEventListener('click', resetGrid);
 addWallButton.addEventListener('click', () => {addWallPressed = true;});
+selectSpeed.addEventListener('change', setSpeed);
+
 // Functions
+
+function setSpeed() {
+    animationTime = selectSpeed.value;
+    document.body.style.setProperty('--speed', animationTime);
+    console.log(animationTime);
+}
 
 function toggleButtons() {
     runButton.disabled = !runButton.disabled;
