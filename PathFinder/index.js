@@ -38,7 +38,7 @@ function setSpeed() {
 }
 
 function toggleButtons() {
-    runButton.disabled = !runButton.disabled;
+    runButton.disabled = !runButton.disabled;    
     clearButton.disabled = !clearButton.disabled;
     clearButton.classList.toggle('btn-disabled');
 }
@@ -90,6 +90,7 @@ function onMouseHover(cell){
     else if (endNodePressed) {
         if (endNode != -1) {
             gridCells[endNode].classList.remove('grid-cell-end');
+            gridCells[endNode].classList.remove('grid-cell-found');
         }
         endNode = cellV;
         cell.classList.add('grid-cell-end');
@@ -166,7 +167,9 @@ function markToVisit(val) {
     gridCells[val].classList.add('grid-cell-tovisit');
 }
 
-
+function markFound(val) {
+    gridCells[val].classList.add('grid-cell-found');
+}
 function getVisited(){
     visited = [];
     pred = []
@@ -177,6 +180,7 @@ function getVisited(){
             gridCells[c].classList.remove('grid-cell-visited');
             gridCells[c].classList.remove('grid-cell-tovisit');
             gridCells[c].classList.remove('grid-cell-path');
+            gridCells[c].classList.remove('grid-cell-found');
             visited[c] = false;
             pred[c] = -1;
         }
@@ -204,7 +208,8 @@ async function bfs(startNode, endNode, animationTime) {
         if (currNode != startNode && currNode != endNode)
             markVisited(currNode);
         if (currNode == endNode) {
-            printPath(endNode, pred, animationTime*6);
+            markFound(currNode);
+            printPath(endNode, pred, animationTime*4);
             break;
         }
         for (let c = 0; c < 4; c++) {
@@ -248,6 +253,7 @@ function runComplete(animationTime) {
     if (animationTime)
     {
         runButton.classList.remove('btn-is-running');
+        gridMap.style.setProperty('--found', true);
         toggleButtons();
     }
 }
