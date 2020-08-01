@@ -11,8 +11,11 @@ let startNodePressed = false;
 let endNodePressed = false;
 let addWallPressed = false;
 let addWall = false;
-
-let runCompleted = false;
+// problem with setting this to be true is that the drag around of the initial
+// start end nodes will lead to calling of the BFS function.
+let runStarted = false;
+let runCompleted = true;
+let execute = false;
 
 const gridRows = 20;
 const gridCols = 54;
@@ -267,10 +270,13 @@ async function printPath(endNode, pred, animationTime)
 
 function runComplete(animationTime) {
     runCompleted = true;
+    // If the runComplete was called when the user was moving
+    // the node after the run was finished, then the Button's weren't changed.
     if (animationTime)
     {
         runButton.classList.remove('btn-is-running');
         gridMap.style.setProperty('--found', true);
         toggleButtons();
     }
+    runButton.innerText = 'Run Algorithm!';
 }
