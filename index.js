@@ -13,7 +13,7 @@ let addWall = false;
 
 let runCompleted = false;
 
-const gridRows = 16;
+const gridRows = 20;
 const gridCols = 54;
 makeRows(gridRows, gridCols);
 let gridCells = document.querySelectorAll('.grid-cell');
@@ -37,7 +37,7 @@ function runAlgorithm(e) {
     e.target.classList.add('btn-is-running');
     toggleButtons();
     runCompleted = false;
-    if (selectBox.value == 'BFS') {
+    if (selectBox.value == 'Dijkstra') {
         bfs(startNode, endNode, animationTime);
     }
 }
