@@ -1,5 +1,4 @@
 import {Config} from './config.js';
-import {dijkstra} from './Algorithms/dijkstra.js';
 
 export function onMouseDown(cell) {
     if (Number(cell.getAttribute('cell-value')) == Config.startNode)
@@ -29,7 +28,7 @@ export function onMouseHover(cell){
         cell.classList.add('grid-cell-start');
 
         if (Config.runStarted && Config.runCompleted) {
-            dijkstra(Config.startNode, Config.endNode, Config.animationTime*0);
+            Config.algorithm(Config.startNode, Config.endNode, Config.animationTime*0);
         }
     }
 
@@ -41,7 +40,7 @@ export function onMouseHover(cell){
         Config.endNode = cellV;
         cell.classList.add('grid-cell-end');
         if (Config.runStarted && Config.runCompleted) {
-            dijkstra(Config.startNode, Config.endNode, Config.animationTime*0);
+            Config.algorithm(Config.startNode, Config.endNode, Config.animationTime*0);
         }
     }
 

@@ -2,6 +2,7 @@ import * as Grid from './grid.js';
 import * as utils from './utils.js';
 import {Config} from './config.js';
 import {dijkstra} from './Algorithms/dijkstra.js';
+import {bidirectional} from './Algorithms/bidirectional.js';
 
 const gridMap = document.querySelector('.grid-map');
 const selectBox = document.querySelector('.algorithms-drop-down');
@@ -55,6 +56,11 @@ function runAlgorithm(e) {
     Config.execute = true;
 
     if (selectBox.value == 'Dijkstra') {
-        dijkstra(Config.startNode, Config.endNode, Config.animationTime);
+        Config.algorithm = dijkstra;
+        Config.algorithm(Config.startNode, Config.endNode, Config.animationTime);
+    }
+    else if (selectBox.value == 'Bidirectional') {
+        Config.algorithm = bidirectional;
+        Config.algorithm(Config.startNode, Config.endNode, Config.animationTime);
     }
 }

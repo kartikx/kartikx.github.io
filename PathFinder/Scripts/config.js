@@ -16,4 +16,5 @@ export let Config = {
     gridMap: null,
     clearButton: null,
     addWallButton: null,
+    algorithm: null
 }

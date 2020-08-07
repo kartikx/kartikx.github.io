@@ -68,8 +68,6 @@ export async function printPath(endNode, pred, animationTime)
         if (animationTime)
             await sleep(animationTime);
     }
-
-    runComplete(animationTime);
 }
 
 export function runComplete(animationTime) {
