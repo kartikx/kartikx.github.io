@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+:root {
+    $grid-cols: 1;
+    $grid-rows: 1;
+    $found: true;
+    $speed: 1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.container {
+    display: grid;
+    grid-template: "options" min-content "grid-map" min-content / min-content;
+    margin-top: 1em;
+    padding: 0em 2em;
+}
+
+.grid-map {
+    border: 1px solid #56CFE1;
+    grid-area: grid-map;
+    display: grid;
+    grid-template-rows: repeat(var(--grid-rows), 1fr);
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+}
+
+
+.navbar {
+    background-color: #007ea7;
+    padding: 0.5em 0.5em;
+    font-size: 1.4rem;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+
+    display: grid;
+    grid-template: "brand dropdown1 run clea-r dropdown2" / 2fr 2fr 1fr 1fr 1fr; 
+    gap: 0 2em;
+    align-items: center;
+
+    .brand {
+        color: white;
+        grid-area: brand;
+        font-weight: 600;
+        font-size: 1.6rem;
+    }
+
+    .algorithms-drop-down {
+        grid-area: dropdown1;
+        margin-left: 30%;
+        width: 70%;
+        height: 100%;
+    }
+
+    button {
+        border: none;
+        padding: 0.5em 0.75em;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: background-color 150ms ease-in-out;
+        color: white;
+    }
+    .btn-run {
+        grid-area: run;
+        background-color: lightseagreen;
+        &:hover {
+            background-color: rgb(33, 172, 165); 
+        }
+    }
+
+    .btn-is-running {
+        grid-area: run;
+        background-color: rgb(182, 27, 27);
+        &:hover {
+            background-color: rgb(156, 26, 26); 
+        }
+    }
+
+    .btn-clear {
+        grid-area: clea-r;
+        background-color: lightseagreen;
+        &:hover {
+            background-color: rgb(33, 172, 165); 
+        }
+    }
+
+    .btn-disabled {
+        background-color: rgb(94, 99, 105);
+        &:hover {
+            background-color: rgb(78, 83, 88); 
+        }
+    }
+
+    .select-speed {
+        grid-area: dropdown2;
+        // margin-left: 10%;
+        width: 80%;
+        height: 100%;
+    }
+}
+
+
+.grid-cell {
+    border: 1px solid #56CFE1;
+    padding: 1em;
+    cursor: pointer;
+}
+
+.grid-cell-start {
+    background-color: aquamarine;
+    background-image: url('./rightarrow.svg');
+    // background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.grid-cell-end {
+    background-image: url('./target2.svg');
+    background-color: lightsalmon;
+    // background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.grid-cell-found {
+    background-color: aquamarine;
+}
+
+.grid-cell-visited {
+    background-color: #4EA8DE;
+    // transition: background-color 150ms ease-in-out;
+    
+    // @if ($found) {
+        // animation-name: visitedAnimation;
+        // animation-duration: 1600ms;
+    // }
+}
+
+.grid-cell-tovisit {
+    background-color: #64DFDF;
+    animation-name: toVisitAnimation;
+    // animation-duration: $speed;
+    animation-duration: 20;
+}
+
+.grid-cell-path {
+    background-color: lightgreen;
+}
+
+.grid-cell-wall {
+    background-image: url('./wall.svg');
+    background-color: lightgrey;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+// Button Bar
+.button-bar {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 2em 1em ;
+    background-color: whitesmoke;
+    font-family: 'Montserrat', sans-serif;
+
+    span {
+        display: inline;
+        font-weight: 500;
+        font-size: 1.4rem;
+        color: #4EA8DE;
+        padding: 0em 0.5em;
+    }
+}
+
+.flex-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.start-node, .end-node, .unvisited-node, .visited-node, .shortest-path-node{
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 2em;
+    width: 2em;
+}
+
+.start-node {
+    background-image: url('./rightarrow.svg');
+    background-color: aquamarine;
+}
+
+.end-node {
+    background-image: url('./target2.svg');
+    background-color: lightsalmon;
+}
+
+.unvisited-node {
+    background-color: white;   
+}
+
+.visited-node {
+    background-color: #4EA8DE;   
+}
+
+.shortest-path-node {
+    background-color: lightgreen;
+}
+
+.wall {
+    svg {
+        height: 2em;
+        width: 2em;
+        .st0{fill: white; stroke:#778899;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+        .st1{fill: none; stroke:#778899;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+        .st2{fill: none; stroke:#778899;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:6,6;}
+        .st3{fill: none; stroke:#778899;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:4,4;}
+        .st4{fill: none; stroke:#778899;stroke-width:2;stroke-linecap:round;}
+        .st5{fill: none; stroke:#778899;stroke-width:2;stroke-linecap:round;stroke-dasharray:3.1081,3.1081;}
+        .st6{fill: none; stroke:#778899;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:4,3;}
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+    cursor: pointer;
+}
+
+@keyframes visitedAnimation {
+    0% {
+      transform: scale(.3);
+      background-color: #007ea7;
+      border-radius: 100%;
+    }
+  
+    // 50% {
+    //   background-color: rgba(17, 104, 217, 0.75);
+    // }
+  
+    // 75% {
+    //   transform: scale(1.2);
+    //   background-color: rgba(0, 217, 159, 0.75);
+    // }
+  
+    100% {
+      transform: scale(1.0);
+      background-color: #4EA8DE;
+    }
+}
+
+@keyframes toVisitAnimation {
+    0% {
+      transform: scale(.3);
+      background-color: lightseagreen;
+      border-radius: 100%;
+    }
+  
+    // 50% {
+    //   background-color: rgba(17, 104, 217, 0.75);
+    // }
+  
+    // 75% {
+    //   transform: scale(1.2);
+    //   background-color: rgba(0, 217, 159, 0.75);
+    // }
+  
+    100% {
+      transform: scale(1.0);
+      background-color: #64DFDF;
+    }
+  }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>PathFinder</title>
+        <!-- Insert some icom -->
+        <link rel="stylesheet" href="main.css" />
+        <link rel="icon" href="https://img.icons8.com/color/48/000000/center-direction.png" 
+         type="image/x-icon"/>
+    </head>
+    <body draggable="false">
+        <nav class="navbar">
+            <span class="brand">PathFinder</span>
+            <select class="algorithms-drop-down">
+                <option value="Dijkstra">Dijkstra's</option>
+                <option value="Bidirectional">Bidirectional Search</option>
+                <!-- <option value="BFS">Breadth First Search</option>
+                <option value="Dijkstra's">Dijkstra's</option> -->
+            </select>
+            <button type="button" class="btn-run">Run Algorithm!</button>
+            <button type="button" class="btn-clear">Reset Grid</button>
+            <select name = "Select Speed" class="select-speed">
+                <option value="1">Fast</option>
+                <option value="5">Medium</option>
+                <option value="30">Slow</option>
+            </select>
+        </nav>
+        <nav class="button-bar">
+            <div class="flex-item">
+                <div class="start-node"></div>
+                <span>Start Node</span>
+            </div>
+            <div class="flex-item">
+                <div class="end-node"></div>
+                <span>End Node</span>
+            </div>
+
+            <div class="flex-item">
+                <div class="unvisited-node"></div>
+                <span>Unvisited Node</span>
+            </div>
+
+            <div class="flex-item">
+                <div class="visited-node"></div>
+                <span>Visited Node</span>
+            </div>
+
+            <div class="flex-item">
+                <div class="shortest-path-node"></div>
+                <span>Shortest Path Node</span>
+            </div>
+
+            <div class="flex-item">
+                <div class="wall">
+                    <svg
+                        version="1.1"
+                        id="Icons"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px"
+                        y="0px"
+                        viewBox="0 0 32 32"
+                        style="enable-background: new 0 0 32 32;"
+                        xml:space="preserve"
+                    >
+                        <rect x="4" y="4" class="st0" width="24" height="24" />
+                        <rect x="4" y="4" class="st0" width="12" height="8" />
+                        <rect x="10" y="12" class="st0" width="12" height="8" />
+                        <rect x="4" y="20" class="st0" width="12" height="8" />
+                        <rect x="16" y="4" class="st0" width="12" height="8" />
+                        <rect x="16" y="20" class="st0" width="12" height="8" />
+                    </svg>
+                </div>
+                <span>Wall Node</span>
+            </div>
+        </nav>
+        <div class="container" draggable="false" onmousedown="return false">
+            <div class="grid-map" draggable="false"></div>
+        </div>
+
+        <script type="module" src="Scripts/index.js"></script>
+    </body>
+</html>
