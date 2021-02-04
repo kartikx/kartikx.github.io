@@ -4,4 +4,4 @@ relative_links:
     enabled: true
     collections: true
 include:
-    - ParallelComputing/Week1.md
+    - Week1.md
